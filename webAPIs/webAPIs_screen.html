@@ -18,12 +18,16 @@
     <div class="tag">Window Size</div>
     <script>
       const tag = document.querySelector(".tag");
+      /* window.screen : 컴퓨터 자체의 해상도 */
+      /* window.outer : 브라우저(상단바, 스크롤 가능 범위 모두 포함) */
+      /* window.inner : 브라우저(상단바 제외, 스크롤 가능 범위 포함) */
+      /* documentElement.client : 브라우저(상단바 제외, 순수 보이는 스크린)*/
       function updateTag() {
         tag.innerHTML = `
-        window.screen : ${window.screen.width}, ${window.screen.height} <br />
+        window.screen : ${window.screen.width}, ${window.screen.height} <br /> 
         window.outer : ${window.outerWidth}, ${window.outerHeight}<br />
         window.inner : ${window.innerWidth}, ${window.innerHeight}<br />
-        documentElement.clientWidth : ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight} <br />
+        documentElement.client : ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight} <br />
         `;
       }
       window.addEventListener("resize", () => {
