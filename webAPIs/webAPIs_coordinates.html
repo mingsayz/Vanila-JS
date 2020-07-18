@@ -18,9 +18,21 @@
       .special {
         background-color: lightsalmon;
       }
+
+      aside {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
     </style>
   </head>
   <body>
+    <aside>
+      <button class="scrollBy">scroll by 100px(y)</button>
+      <button class="scrollTo">scroll to 100px(y)</button>
+      <button class="scrollInto">scroll into special</button>
+    </aside>
+
     <div></div>
     <div></div>
     <div></div>
@@ -43,6 +55,23 @@
         console.log(rect);
         console.log(`pageXY : ${event.pageX} ${event.pageY}`);
         console.log(`clientXY : ${event.clientX} ${event.clientY}`);
+      });
+
+      const scrollBy = document.querySelector(".scrollBy");
+      scrollBy.addEventListener("click", () => {
+        // window.scrollBy(0, 100);
+        window.scrollBy({ top: 100, left: 0, behavior: "smooth" });
+      });
+
+      const scrollTo = document.querySelector(".scrollTo");
+      scrollTo.addEventListener("click", () => {
+        // window.scrollTo(0, 100);
+        window.scrollTo({ top: 100, left: 0, behavior: "smooth" });
+      });
+
+      const scrollInto = document.querySelector(".scrollInto");
+      scrollInto.addEventListener("click", () => {
+        special.scrollIntoView();
       });
     </script>
   </body>
