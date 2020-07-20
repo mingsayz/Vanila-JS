@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Window load</title>
+    <script src="defer_test.js" defer></script>
+  </head>
+  <body>
+    <script>
+      // 브라우저는 웹페이지를 읽어올때 html파일을 먼저 읽은 다음에, 그에 관련된 이미지나 폰트, 필요한 리소스를 함께 다운로드 한다. 그리고 자바스크립트 파일이 있다면 그 자바스크립트 파일도 다운로드 받는데, 이 부분은 블로그 자바스크립트 defer async 문서를 참고하면 됨.
+
+      //only script : 즉, html로드와 DOM 트리를 완성하는 즉시 콜백함수 호출 : 페이지가 리소스가 많을 경우 효율적.
+      window.addEventListener("DOMContentLoaded", () => {
+        console.log("DOMContentLoaded");
+      });
+      // after resources (css, images) : 즉 , css나 이미지등 모든 리소스가 다운로드가 되면 호출
+      window.addEventListener("load", () => {
+        console.log("load");
+      });
+
+      // result: defer test > DOMContentLoaded > load
+      // 즉, defer 옵션을 쓰게되면 html이 전부 파싱된 이후 contentloaded 이벤트가 발생하기 전에 호출
+      // 자바스크립트 파일이 이미지나 폰트 등에 대해서 뭔가 작업을 수행하지 않는 이상, DOMContentLoaded 안에서 동작을 수행하는 것이 사용자 입장에서 빠르게 볼 수 있ㅏ다.
+
+      //before unload: 사용자가 페이지를 떠날 때 발생 (사용 예: 사용자가 사이트를 떠나려 할때, 변경되지 않은 사항들을 저장했는지 확인시켜 줄때)
+      window.addEventListener("beforeunload", () => {
+        console.log("beforeunloaded");
+      });
+
+      // resource is being unloaded : 사용자가 페이지를 떠날때 발생 (사용 예: 사용자가 진짜 떠나기전에 사용자 분석 정보를 담은 통계자료를 전송하고자 할때)
+      window.addEventListener("unload", () => {
+        console.log("unload");
+      });
+    </script>
+  </body>
+</html>
